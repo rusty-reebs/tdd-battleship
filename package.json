@@ -1,0 +1,39 @@
+{
+  "name": "tdd-battleship",
+  "version": "1.0.0",
+  "description": "⛴ Battleship game with test-driven-development for theodinproject.com",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "build": "webpack",
+    "watch": "webpack --watch"
+  },
+  "jest": {
+    "modulePaths": ["/shared/vendor/modules"],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": ["node_modules", "bower_components", "shared"],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
+      "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
+      "^react(.*)$": "<rootDir>/vendor/react-master$1",
+      "^config$": "<rootDir>/configs/app-config.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rusty-reebs/tdd-battleship.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rusty-reebs/tdd-battleship/issues"
+  },
+  "homepage": "https://github.com/rusty-reebs/tdd-battleship#readme",
+  "devDependencies": {
+    "jest": "^27.2.4",
+    "webpack": "^5.57.1",
+    "webpack-cli": "^4.8.0"
+  }
+}

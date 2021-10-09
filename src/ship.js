@@ -6,7 +6,6 @@
 // add hit to counter, if counter matches length then sunk?
 
 const Ship = (length, symbol) => {
-  this.symbol = symbol;
   let hitCounter = 0;
   const hit = () => {
     hitCounter++;
@@ -14,7 +13,7 @@ const Ship = (length, symbol) => {
   const isSunk = () => {
     if (hitCounter === length) return true;
   };
-  return { hit, isSunk, symbol };
+  return { length, hit, isSunk, symbol };
 };
 
 // const carrier = Ship(5, "C");
@@ -38,4 +37,4 @@ const Ship = (length, symbol) => {
 //   return { length, hitArray, hit, isSunk };
 // };
 
-module.exports = Ship;
+export { Ship };

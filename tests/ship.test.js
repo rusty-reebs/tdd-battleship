@@ -1,6 +1,6 @@
 //TODO write a test, then make it pass
 
-const Ship = require("../src/ship");
+import { Ship } from "../src/ship";
 
 // test("adds a hit", () => {
 //   const battleship = Ship(4);

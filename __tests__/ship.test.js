@@ -2,10 +2,10 @@
 
 import { Ship } from "../src/ship";
 
-test("isSunk returns undefined when hits < length", () => {
+test("isSunk returns false when hits < length", () => {
   const battleship = Ship("battleship");
   battleship.hit();
-  expect(battleship.isSunk()).toBe(undefined);
+  expect(battleship.isSunk()).toBe(false);
 });
 
 test("isSunk returns true when hits = length", () => {

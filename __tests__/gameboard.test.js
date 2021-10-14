@@ -16,15 +16,15 @@ test("gameboard array starts with A1 and ends with J10", () => {
 
 test("carrier placed horizontally at A2", () => {
   playerOneGameboard.placeShip("carrier", "A2");
-  expect(playerOneGameboard.array[10].occupiedBy).toEqual("carrier");
+  expect(playerOneGameboard.array[10].occupiedBy.name).toEqual("carrier");
 });
 
 test("battleship placed horizontally at A1", () => {
   playerOneGameboard.placeShip("battleship", "A1");
-  expect(playerOneGameboard.array[0].occupiedBy).toEqual("battleship");
-  expect(playerOneGameboard.array[1].occupiedBy).toEqual("battleship");
-  expect(playerOneGameboard.array[2].occupiedBy).toEqual("battleship");
-  expect(playerOneGameboard.array[3].occupiedBy).toEqual("battleship");
+  expect(playerOneGameboard.array[0].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[1].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[2].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[3].occupiedBy.name).toEqual("battleship");
 });
 
 test("destroyer not on H3", () => {
@@ -34,7 +34,7 @@ test("destroyer not on H3", () => {
 
 test("destroyer on F3", () => {
   playerOneGameboard.placeShip("destroyer", "E3");
-  expect(playerOneGameboard.array[25].occupiedBy).toEqual("destroyer");
+  expect(playerOneGameboard.array[25].occupiedBy.name).toEqual("destroyer");
 });
 
 test("attack is a miss", () => {

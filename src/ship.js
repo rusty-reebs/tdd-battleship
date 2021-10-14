@@ -5,6 +5,7 @@
 const Ship = (shipname) => {
   let name;
   let length;
+  let hits = 0;
   switch (shipname) {
     case "carrier":
       name = shipname;
@@ -29,13 +30,14 @@ const Ship = (shipname) => {
   let hitCounter = 0;
   const hit = () => {
     hitCounter++;
+    console.log("HitCounter", hitCounter);
     return hitCounter;
   };
   const isSunk = () => {
     if (hitCounter === length) return true;
     else return false;
   };
-  return { name, length, hit, isSunk };
+  return { name, length, hit, hitCounter, hits, isSunk };
 };
 
 export { Ship };

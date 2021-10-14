@@ -18,34 +18,45 @@ const Gameboard = () => {
   };
 
   let placedShips = [];
-
   const placeShip = (shipname, coord) => {
     shipname = Ship(shipname);
     const index = array.findIndex((coords) => coords.name === coord);
-    // console.log(index);
     for (let i = 0; i < shipname.length; i++) {
-      array[index + i].occupiedBy = shipname.name;
+      array[index + i].occupiedBy = shipname;
     }
     placedShips.push(shipname);
     console.log(shipname);
     console.log(placedShips);
   };
 
+  let sunkShips = [];
   const receiveAttack = (coord) => {
-    let boatObject;
+    let shipObject;
     const index = array.findIndex((coords) => coords.name === coord);
-    console.log(index);
-    switch (array[index].occupiedBy) {
-      case "patrolboat":
-        boatObject = placedShips.find((ship) => ship.name == "patrolboat");
-        boatObject.hit();
-        console.log("Hit", boatObject);
-        console.log("Sunk", boatObject.isSunk());
-        break;
-      default:
-        array[index].missedShot = true;
-        console.log(array[index].missedShot);
-    }
+    console.log("Attack array index", index);
+    if (!array[index].occupiedBy) {
+      array[index].missedShot = true;
+      console.log("Missed shot", array[index]);
+    } else
+      switch (array[index].occupiedBy.name) {
+        case "patrolboat":
+          shipObject = placedShips.find((ship) => ship.name === "patrolboat");
+          shipObject.hit();
+          shipObject.hits++;
+
+          console.log("Hit", shipObject);
+          console.log("HitCounter", shipObject.hitCounter);
+          console.log("Hits", shipObject.hits);
+          console.log("Sunk", shipObject.isSunk());
+          if (shipObject.isSunk()) {
+            sunkShips.push(shipObject);
+            console.log("Sunk ships", sunkShips);
+          }
+          break;
+        default:
+        // array[index].missedShot = true;
+        // console.log("Missed shot", array[index].missedShot);
+      }
   };
   return { array, buildArray, placeShip, placedShips, receiveAttack };
 };

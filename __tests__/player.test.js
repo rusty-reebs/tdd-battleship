@@ -5,12 +5,19 @@ test("player attacks and logs a hit on opponent ship", () => {
   const playerTwoGameboard = Gameboard();
   playerTwoGameboard.buildArray();
   playerTwoGameboard.placeShip("patrolboat", "A1");
-
   const player1 = Player("Admiral");
-  const player2 = Player("Seaman");
   player1.attack(playerTwoGameboard, "A1");
   let patrolboat = playerTwoGameboard.placedShips.find(
     (ship) => ship.name == "patrolboat"
   );
   expect(patrolboat.hits).toEqual(1);
+});
+
+test("computer player attacks random coordinates", () => {
+  const playerOneGameboard = Gameboard();
+  playerOneGameboard.buildArray();
+  const player2 = Player("computer");
+  player2.attack(playerOneGameboard);
+  let missedArray = playerOneGameboard.array.map((coord) => coord.missedShot);
+  expect(missedArray).toContain(true);
 });

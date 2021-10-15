@@ -16,7 +16,12 @@ const Player = (name) => {
     let computerCoords;
     if (name === "computer") {
       //logic for generating random coords, incld not shoot same coord twice
+      let misses = Gameboard["missedShots"];
+      console.log(misses);
       computerCoords = generateCoords();
+      // while (Gameboard["missedShots"].includes(computerCoords)) {
+      // computerCoords = generateCoords();
+      // }
       enemy.receiveAttack(computerCoords);
     } else enemy.receiveAttack(coord);
   };

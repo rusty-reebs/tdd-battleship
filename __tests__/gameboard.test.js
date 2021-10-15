@@ -39,7 +39,8 @@ test("destroyer on F3", () => {
 
 test("attack is a miss", () => {
   playerOneGameboard.receiveAttack("A1");
-  expect(playerOneGameboard.array[0].missedShot).toBe(true);
+  // expect(playerOneGameboard.array[0].missedShot).toBe(true);
+  expect(playerOneGameboard.missedShots).toContain("A1");
 });
 
 test("patrol boat is !sunk on one hit", () => {

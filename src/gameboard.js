@@ -30,13 +30,17 @@ const Gameboard = () => {
   };
 
   let sunkShips = [];
+  let missedShots = [];
+
   const receiveAttack = (coord) => {
     let shipObject;
     const index = array.findIndex((coords) => coords.name === coord);
     console.log("Attack array index", index);
     if (!array[index].occupiedBy) {
-      array[index].missedShot = true;
-      console.log("Missed shot", array[index]);
+      // array[index].missedShot = true;
+      missedShots.push(coord);
+      // console.log("Missed shot", array[index]);
+      console.log("Missed shot", missedShots);
     } else
       switch (array[index].occupiedBy.name) {
         case "patrolboat":
@@ -58,7 +62,14 @@ const Gameboard = () => {
         // console.log("Missed shot", array[index].missedShot);
       }
   };
-  return { array, buildArray, placeShip, placedShips, receiveAttack };
+  return {
+    array,
+    buildArray,
+    placeShip,
+    placedShips,
+    missedShots,
+    receiveAttack,
+  };
 };
 
 export { Gameboard };

@@ -17,15 +17,26 @@ const Gameboard = () => {
     return array;
   };
 
+  //TODO vertical placement of ships
+  //TODO not exceed boundaries
+  //TODO not overlapping other ships
+
   let placedShips = [];
-  const placeShip = (shipname, coord) => {
+  const placeShip = (shipname, coord, orientation) => {
     shipname = Ship(shipname);
     const index = array.findIndex((coords) => coords.name === coord);
-    for (let i = 0; i < shipname.length; i++) {
-      array[index + i].occupiedBy = shipname;
+    array[index].occupiedBy = shipname;
+    for (let i = 1; i < shipname.length; i++) {
+      switch (orientation) {
+        case "horizontal":
+          array[index + i].occupiedBy = shipname;
+          break;
+        case "vertical":
+          array[index + i * 10].occupiedBy = shipname;
+      }
     }
     placedShips.push(shipname);
-    console.log(shipname);
+    // console.log(shipname);
     console.log(placedShips);
   };
 

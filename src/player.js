@@ -1,5 +1,7 @@
 // Player factory function
 
+import { Gameboard } from "./gameboard";
+
 const Player = (name) => {
   const generateCoords = () => {
     const letters = "ABCDEFGHIJ";

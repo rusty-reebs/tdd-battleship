@@ -35,6 +35,7 @@ const Gameboard = () => {
   const receiveAttack = (coord) => {
     const index = array.findIndex((coords) => coords.name === coord);
     console.log("Attack array index", index);
+    console.log("occupied by", array[index].occupiedBy);
     if (!array[index].occupiedBy) {
       array[index].missedShot = true;
       // missedShots.push(coord);
@@ -57,18 +58,17 @@ const Gameboard = () => {
           break;
         case "carrier":
           shipObject = placedShips.find((ship) => ship.name === "carrier");
+      }
+      shipObject.hit();
+      shipObject.hits++;
 
-          shipObject.hit();
-          shipObject.hits++;
-
-          console.log("Hit", shipObject);
-          console.log("HitCounter", shipObject.hitCounter);
-          console.log("Hits", shipObject.hits);
-          console.log("Sunk", shipObject.isSunk());
-          if (shipObject.isSunk()) {
-            sunkShips.push(shipObject);
-            console.log("Sunk ships", sunkShips);
-          }
+      console.log("Hit", shipObject);
+      console.log("HitCounter", shipObject.hitCounter);
+      console.log("Hits", shipObject.hits);
+      console.log("Sunk", shipObject.isSunk());
+      if (shipObject.isSunk()) {
+        sunkShips.push(shipObject);
+        console.log("Sunk ships", sunkShips);
       }
     }
   };

@@ -30,21 +30,34 @@ const Gameboard = () => {
   };
 
   let sunkShips = [];
-  let missedShots = [];
+  // let missedShots = [];
 
   const receiveAttack = (coord) => {
-    let shipObject;
     const index = array.findIndex((coords) => coords.name === coord);
     console.log("Attack array index", index);
     if (!array[index].occupiedBy) {
-      // array[index].missedShot = true;
-      missedShots.push(coord);
-      // console.log("Missed shot", array[index]);
-      console.log("Missed shot", missedShots);
-    } else
+      array[index].missedShot = true;
+      // missedShots.push(coord);
+      console.log("Missed shot", array[index]);
+      // console.log("Missed shot", missedShots);
+    } else {
+      let shipObject;
       switch (array[index].occupiedBy.name) {
         case "patrolboat":
           shipObject = placedShips.find((ship) => ship.name === "patrolboat");
+          break;
+        case "submarine":
+          shipObject = placedShips.find((ship) => ship.name === "submarine");
+          break;
+        case "destroyer":
+          shipObject = placedShips.find((ship) => ship.name === "destroyer");
+          break;
+        case "battleship":
+          shipObject = placedShips.find((ship) => ship.name === "battleship");
+          break;
+        case "carrier":
+          shipObject = placedShips.find((ship) => ship.name === "carrier");
+
           shipObject.hit();
           shipObject.hits++;
 
@@ -56,18 +69,15 @@ const Gameboard = () => {
             sunkShips.push(shipObject);
             console.log("Sunk ships", sunkShips);
           }
-          break;
-        default:
-        // array[index].missedShot = true;
-        // console.log("Missed shot", array[index].missedShot);
       }
+    }
   };
   return {
     array,
     buildArray,
     placeShip,
     placedShips,
-    missedShots,
+    // missedShots,
     receiveAttack,
   };
 };

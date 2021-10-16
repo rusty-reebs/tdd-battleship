@@ -1,28 +1,25 @@
 // Player factory function
 
-import { Gameboard } from "./gameboard";
-
 const Player = (name) => {
   const generateCoords = () => {
-    //random x axis
     const letters = "ABCDEFGHIJ";
     const randomLetter = letters[Math.floor(Math.random() * letters.length)];
-    //random y axis
     const randomNumber = Math.floor(Math.random() * 10 + 1);
     return randomLetter.concat(randomNumber);
   };
 
+  let shotsFired = [];
   const attack = (enemy, coord) => {
-    let computerCoords;
     if (name === "computer") {
-      //logic for generating random coords, incld not shoot same coord twice
-      let misses = Gameboard["missedShots"];
-      console.log(misses);
-      computerCoords = generateCoords();
-      // while (Gameboard["missedShots"].includes(computerCoords)) {
-      // computerCoords = generateCoords();
-      // }
+      // let misses = Gameboard["missedShots"];
+      // console.log(misses);
+      let computerCoords = generateCoords();
+      while (shotsFired.includes(computerCoords)) {
+        computerCoords = generateCoords();
+      }
       enemy.receiveAttack(computerCoords);
+      shotsFired.push(computerCoords);
+      console.log("shots fired", shotsFired);
     } else enemy.receiveAttack(coord);
   };
   return { name, attack };

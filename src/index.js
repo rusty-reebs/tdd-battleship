@@ -3,13 +3,22 @@
 import { Gameboard } from "./gameboard";
 import { Player } from "./player";
 
-const player1 = Player("Captain");
-const player2 = Player("Admiral");
-const playerOneGameboard = Gameboard();
-playerOneGameboard.buildArray();
-playerOneGameboard.placeShip("battleship", "A1", "horizontal");
-playerOneGameboard.placeShip("carrier", "B1", "vertical");
-console.log(playerOneGameboard.array);
+// const player1 = Player("Captain");
+// const player2 = Player("Admiral");
+// const playerOneGameboard = Gameboard();
+// playerOneGameboard.buildArray();
+// playerOneGameboard.placeShip("battleship", "A1", "horizontal");
+// playerOneGameboard.placeShip("carrier", "A1", "horizontal");
+
+const playerTwoGameboard = Gameboard();
+playerTwoGameboard.buildArray();
+playerTwoGameboard.placeShip("patrolboat", "A1", "horizontal");
+const player1 = Player("Admiral");
+player1.attack(playerTwoGameboard, "A1");
+let patrolboat = playerTwoGameboard.placedShips.find(
+  (ship) => ship.name == "patrolboat"
+);
+console.log(playerTwoGameboard.array);
 // player2.attack(playerOneGameboard, "A1");
 // player2.attack(playerOneGameboard, "B1");
 // playerOneGameboard.receiveAttack("A1");

@@ -4,7 +4,7 @@ import { Player } from "../src/player";
 test("player attacks and logs a hit on opponent ship", () => {
   const playerTwoGameboard = Gameboard();
   playerTwoGameboard.buildArray();
-  playerTwoGameboard.placeShip("patrolboat", "A1");
+  playerTwoGameboard.placeShip("patrolboat", "A1", "horizontal");
   const player1 = Player("Admiral");
   player1.attack(playerTwoGameboard, "A1");
   let patrolboat = playerTwoGameboard.placedShips.find(

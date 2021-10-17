@@ -61,3 +61,11 @@ test("patrol boat is sunk on two hits", () => {
   );
   expect(patrolboat.isSunk()).toBe(true);
 });
+
+test("two ships cannot occupy same coordinates", () => {
+  playerOneGameboard.placeShip("battleship", "A1", "horizontal");
+  playerOneGameboard.placeShip("submarine", "A1", "vertical");
+  expect(playerOneGameboard.array[0].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[1].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[10].occupiedBy).toEqual(undefined);
+});

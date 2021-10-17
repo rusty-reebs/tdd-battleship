@@ -31,30 +31,44 @@ const Gameboard = () => {
 
     // }
     // if orientation === vertical then cannot exceed A10-J10
-
     //! need to check the indexes first for occupiedBy?
-    // for (let i = 0; i < shipname.length; i++) {
-    //   if (
-    //     array[index + i].occupiedBy
-    //   )
-    // //     console.error("Error, one of those coords is occupied");
-    //   }
-
-    //! after indexes are confirmed vacant do this:
-    array[index].occupiedBy = shipname;
+    let vacant;
     for (let i = 1; i < shipname.length; i++) {
-      switch (orientation) {
-        case "horizontal":
-          array[index + i].occupiedBy = shipname;
-          break;
-        case "vertical":
-          array[index + i * 10].occupiedBy = shipname;
-      }
+      if (
+        orientation === "horizontal" &&
+        !array[index + i].occupiedBy &&
+        !array[index].occupiedBy
+      ) {
+        vacant = true;
+        console.log("yay, those spots are vacant");
+      } else if (
+        orientation === "vertical" &&
+        !array[index + i * 10].occupiedBy &&
+        !array[index].occupiedBy
+      ) {
+        vacant = true;
+        console.log("yay, those spots are vacant");
+      } else console.error("Error, one of those coords is occupied");
     }
-    //! end
+    if (vacant) {
+      //! after indexes are confirmed vacant do this:
+      array[index].occupiedBy = shipname;
+      for (let i = 1; i < shipname.length; i++) {
+        switch (orientation) {
+          case "horizontal":
+            array[index + i].occupiedBy = shipname;
+            break;
+          case "vertical":
+            array[index + i * 10].occupiedBy = shipname;
+        }
+      }
+
+      placedShips.push(shipname);
+      //! end
+    }
+
     // console.log(shipname);
 
-    placedShips.push(shipname);
     console.log(placedShips);
   };
 

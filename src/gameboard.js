@@ -5,11 +5,11 @@ const Gameboard = () => {
   const buildArray = () => {
     let xcoord;
     let ycoord;
-    for (let interval = 1; interval <= 10; interval++) {
-      ycoord = interval;
-      for (let i = 65; i < 75; i++) {
-        xcoord = String.fromCharCode(i);
-        let coord = { name: xcoord.concat(ycoord), x: xcoord, y: ycoord };
+    for (let i = 65; i < 75; i++) {
+      ycoord = String.fromCharCode(i);
+      for (let i = 1; i <= 10; i++) {
+        xcoord = i;
+        let coord = { name: ycoord.concat(xcoord), x: xcoord, y: ycoord };
         array.push(coord);
       }
     }
@@ -25,6 +25,22 @@ const Gameboard = () => {
   const placeShip = (shipname, coord, orientation) => {
     shipname = Ship(shipname);
     const index = array.findIndex((coords) => coords.name === coord);
+    // if orientation === horizontal then cannot wrap
+    // 10 - length index not greater than 10-length
+    // if (orientation === "horizontal") && shipname.length {
+
+    // }
+    // if orientation === vertical then cannot exceed A10-J10
+
+    //! need to check the indexes first for occupiedBy?
+    // for (let i = 0; i < shipname.length; i++) {
+    //   if (
+    //     array[index + i].occupiedBy
+    //   )
+    // //     console.error("Error, one of those coords is occupied");
+    //   }
+
+    //! after indexes are confirmed vacant do this:
     array[index].occupiedBy = shipname;
     for (let i = 1; i < shipname.length; i++) {
       switch (orientation) {
@@ -35,8 +51,10 @@ const Gameboard = () => {
           array[index + i * 10].occupiedBy = shipname;
       }
     }
-    placedShips.push(shipname);
+    //! end
     // console.log(shipname);
+
+    placedShips.push(shipname);
     console.log(placedShips);
   };
 

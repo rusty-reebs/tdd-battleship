@@ -14,27 +14,27 @@ test("gameboard array starts with A1 and ends with J10", () => {
   expect(playerOneGameboard.array[arrayLength - 1].name).toEqual("J10");
 });
 
-test("carrier placed horizontally at A2", () => {
-  playerOneGameboard.placeShip("carrier", "A2");
+test("carrier placed horizontally at B1", () => {
+  playerOneGameboard.placeShip("carrier", "B1", "horizontal");
   expect(playerOneGameboard.array[10].occupiedBy.name).toEqual("carrier");
 });
 
-test("battleship placed horizontally at A1", () => {
-  playerOneGameboard.placeShip("battleship", "A1");
+test("battleship placed vertically at A1", () => {
+  playerOneGameboard.placeShip("battleship", "A1", "vertical");
   expect(playerOneGameboard.array[0].occupiedBy.name).toEqual("battleship");
-  expect(playerOneGameboard.array[1].occupiedBy.name).toEqual("battleship");
-  expect(playerOneGameboard.array[2].occupiedBy.name).toEqual("battleship");
-  expect(playerOneGameboard.array[3].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[10].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[20].occupiedBy.name).toEqual("battleship");
+  expect(playerOneGameboard.array[30].occupiedBy.name).toEqual("battleship");
 });
 
-test("destroyer not on H3", () => {
-  playerOneGameboard.placeShip("destroyer", "E3");
-  expect(playerOneGameboard.array[27].occupiedBy).toEqual(undefined);
+test("destroyer not on C1", () => {
+  playerOneGameboard.placeShip("destroyer", "C2", "horizontal");
+  expect(playerOneGameboard.array[20].occupiedBy).toEqual(undefined);
 });
 
-test("destroyer on F3", () => {
-  playerOneGameboard.placeShip("destroyer", "E3");
-  expect(playerOneGameboard.array[25].occupiedBy.name).toEqual("destroyer");
+test("destroyer on C3", () => {
+  playerOneGameboard.placeShip("destroyer", "C2", "horizontal");
+  expect(playerOneGameboard.array[22].occupiedBy.name).toEqual("destroyer");
 });
 
 test("attack is a miss", () => {
@@ -44,8 +44,8 @@ test("attack is a miss", () => {
 });
 
 test("patrol boat is !sunk on one hit", () => {
-  playerOneGameboard.placeShip("patrolboat", "A2");
-  playerOneGameboard.receiveAttack("A2");
+  playerOneGameboard.placeShip("patrolboat", "A1", "horizontal");
+  playerOneGameboard.receiveAttack("A1");
   let patrolboat = playerOneGameboard.placedShips.find(
     (ship) => ship.name == "patrolboat"
   );
@@ -53,9 +53,9 @@ test("patrol boat is !sunk on one hit", () => {
 });
 
 test("patrol boat is sunk on two hits", () => {
-  playerOneGameboard.placeShip("patrolboat", "A1");
+  playerOneGameboard.placeShip("patrolboat", "A1", "horizontal");
   playerOneGameboard.receiveAttack("A1");
-  playerOneGameboard.receiveAttack("B1");
+  playerOneGameboard.receiveAttack("A2");
   let patrolboat = playerOneGameboard.placedShips.find(
     (ship) => ship.name == "patrolboat"
   );

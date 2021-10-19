@@ -3,13 +3,17 @@ import { Ship } from "./ship";
 const Gameboard = () => {
   let array = [];
   const buildArray = () => {
-    let xcoord;
-    let ycoord;
     for (let i = 65; i < 75; i++) {
-      ycoord = String.fromCharCode(i);
+      let ycoord = String.fromCharCode(i);
+      let ycoordNum = i - 64;
       for (let i = 1; i <= 10; i++) {
-        xcoord = i;
-        let coord = { name: ycoord.concat(xcoord), x: xcoord, y: ycoord };
+        let xcoord = i;
+        let coord = {
+          name: ycoord.concat(xcoord),
+          x: xcoord,
+          y: ycoord,
+          yNum: ycoordNum,
+        };
         array.push(coord);
       }
     }
@@ -17,9 +21,7 @@ const Gameboard = () => {
     return array;
   };
 
-  //TODO vertical placement of ships
   //TODO not exceed boundaries
-  //TODO not overlapping other ships
 
   let placedShips = [];
   const placeShip = (shipname, coord, orientation) => {
@@ -27,11 +29,32 @@ const Gameboard = () => {
     const index = array.findIndex((coords) => coords.name === coord);
     // if orientation === horizontal then cannot wrap
     // 10 - length index not greater than 10-length
-    // if (orientation === "horizontal") && shipname.length {
 
-    // }
     // if orientation === vertical then cannot exceed A10-J10
-    //! need to check the indexes first for occupiedBy?
+    //! need to check if ship will fit horizontally
+    let fitHorizontal;
+    if (
+      orientation === "horizontal" &&
+      // array[index] + shipname.length < 100 && //TODO cannot exceed 99 for horizontal, J for vertical
+      shipname.length <= 10 - array[index].x + 1
+    ) {
+      fitHorizontal = true;
+      console.log("fits horizontal", fitHorizontal);
+    }
+    // else console.error("the ship exceeds the board horizontally!"); //! because it's marked as vertical?
+
+    //! fit vertically
+    let fitVertical;
+    if (
+      orientation === "vertical" &&
+      shipname.length <= 10 - array[index].yNum + 1
+    ) {
+      fitVertical = true;
+      console.log("fits vertical", fitVertical);
+    }
+    // else console.error("the ship won't fit vertically!");
+
+    //! need to check the indexes first for occupiedBy? ALSO index cannot exceed 99
     let vacant;
     for (let i = 1; i < shipname.length; i++) {
       if (
@@ -50,7 +73,8 @@ const Gameboard = () => {
         console.log("yay, those spots are vacant");
       } else console.error("Error, one of those coords is occupied");
     }
-    if (vacant) {
+    if ((vacant && fitHorizontal) || (vacant && fitVertical)) {
+      //! && fitHorizontal || fitVertical
       //! after indexes are confirmed vacant do this:
       array[index].occupiedBy = shipname;
       for (let i = 1; i < shipname.length; i++) {

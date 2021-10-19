@@ -12,12 +12,7 @@ import { Player } from "./player";
 
 const playerTwoGameboard = Gameboard();
 playerTwoGameboard.buildArray();
-playerTwoGameboard.placeShip("patrolboat", "A1", "horizontal");
-const player1 = Player("Admiral");
-player1.attack(playerTwoGameboard, "A1");
-let patrolboat = playerTwoGameboard.placedShips.find(
-  (ship) => ship.name == "patrolboat"
-);
+playerTwoGameboard.placeShip("carrier", "J8", "horizontal");
 console.log(playerTwoGameboard.array);
 // player2.attack(playerOneGameboard, "A1");
 // player2.attack(playerOneGameboard, "B1");

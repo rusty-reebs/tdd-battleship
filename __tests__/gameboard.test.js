@@ -8,14 +8,16 @@ beforeEach(() => {
   playerOneGameboard.buildArray();
 });
 
-describe("Gameboard factory", () => {
-  test("gameboard array starts with A1 and ends with J10", () => {
-    const arrayLength = playerOneGameboard.array.length;
-    expect(playerOneGameboard.array[0].name).toEqual("A1");
-    expect(playerOneGameboard.array[arrayLength - 1].name).toEqual("J10");
+describe("Gameboard factory tests", () => {
+  describe("buildArray method", () => {
+    test("gameboard array starts with A1 and ends with J10", () => {
+      const arrayLength = playerOneGameboard.array.length;
+      expect(playerOneGameboard.array[0].name).toEqual("A1");
+      expect(playerOneGameboard.array[arrayLength - 1].name).toEqual("J10");
+    });
   });
 
-  describe("placeShip method tests", () => {
+  describe("placeShip method", () => {
     test("patrolboat placed horizontally at B1", () => {
       playerOneGameboard.placeShip("patrolboat", "B1", "horizontal");
       expect(playerOneGameboard.array[10].occupiedBy.name).toEqual(
@@ -40,16 +42,6 @@ describe("Gameboard factory", () => {
       );
     });
 
-    test("destroyer not on C1", () => {
-      playerOneGameboard.placeShip("destroyer", "C2", "horizontal");
-      expect(playerOneGameboard.array[20].occupiedBy).toEqual(undefined);
-    });
-
-    test("destroyer on C3", () => {
-      playerOneGameboard.placeShip("destroyer", "C2", "horizontal");
-      expect(playerOneGameboard.array[22].occupiedBy.name).toEqual("destroyer");
-    });
-
     test("two ships cannot occupy same coordinates", () => {
       playerOneGameboard.placeShip("battleship", "A1", "horizontal");
       playerOneGameboard.placeShip("submarine", "A1", "vertical");
@@ -69,11 +61,10 @@ describe("Gameboard factory", () => {
     });
   });
 
-  describe("receiveAttack method tests", () => {
+  describe("receiveAttack method", () => {
     test("attack is a miss", () => {
       playerOneGameboard.receiveAttack("A1");
       expect(playerOneGameboard.array[0].missedShot).toBe(true);
-      // expect(playerOneGameboard.missedShots).toContain("A1");
     });
 
     test("patrol boat is !sunk on one hit", () => {

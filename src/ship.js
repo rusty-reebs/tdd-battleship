@@ -30,7 +30,6 @@ const Ship = (shipname) => {
   let hitCounter = 0;
   const hit = () => {
     hitCounter++;
-    console.log("HitCounter", hitCounter);
     return hitCounter;
   };
   const isSunk = () => {

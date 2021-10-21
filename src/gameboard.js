@@ -17,7 +17,6 @@ const Gameboard = () => {
         array.push(coord);
       }
     }
-    // console.log(array);
     return array;
   };
 
@@ -32,7 +31,6 @@ const Gameboard = () => {
       shipname.length <= 10 - array[index].x + 1
     ) {
       fitHorizontal = true;
-      console.log("fits horizontal", fitHorizontal);
     }
 
     let fitVertical = false;
@@ -41,7 +39,6 @@ const Gameboard = () => {
       shipname.length <= 10 - array[index].yNum + 1
     ) {
       fitVertical = true;
-      console.log("fits vertical", fitVertical);
     }
 
     let vacant;
@@ -57,7 +54,6 @@ const Gameboard = () => {
             vacant = false;
             vacantArray.push(vacant);
           }
-          console.log(vacantArray);
         }
         if (orientation === "vertical") {
           if (!array[index + i * 10].occupiedBy && !array[index].occupiedBy) {
@@ -67,7 +63,6 @@ const Gameboard = () => {
             vacant = false;
             vacantArray.push(vacant);
           }
-          console.log(vacantArray);
         }
       }
     }
@@ -86,24 +81,14 @@ const Gameboard = () => {
 
       placedShips.push(shipname);
     }
-
-    // console.log(shipname);
-
-    console.log(placedShips);
   };
 
   let sunkShips = [];
-  // let missedShots = [];
 
   const receiveAttack = (coord) => {
     const index = array.findIndex((coords) => coords.name === coord);
-    console.log("Attack array index", index);
-    console.log("occupied by", array[index].occupiedBy);
     if (!array[index].occupiedBy) {
       array[index].missedShot = true;
-      // missedShots.push(coord);
-      console.log("Missed shot", array[index]);
-      // console.log("Missed shot", missedShots);
     } else {
       let shipObject;
       switch (array[index].occupiedBy.name) {
@@ -125,13 +110,8 @@ const Gameboard = () => {
       shipObject.hit();
       shipObject.hits++;
 
-      console.log("Hit", shipObject);
-      console.log("HitCounter", shipObject.hitCounter);
-      console.log("Hits", shipObject.hits);
-      console.log("Sunk", shipObject.isSunk());
       if (shipObject.isSunk()) {
         sunkShips.push(shipObject);
-        console.log("Sunk ships", sunkShips);
       }
     }
   };
@@ -140,7 +120,6 @@ const Gameboard = () => {
     buildArray,
     placeShip,
     placedShips,
-    // missedShots,
     receiveAttack,
   };
 };

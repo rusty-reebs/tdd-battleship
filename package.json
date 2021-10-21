@@ -10,6 +10,7 @@
     "watch": "webpack --watch"
   },
   "jest": {
+    "verbose": true,
     "modulePaths": [
       "/shared/vendor/modules"
     ],

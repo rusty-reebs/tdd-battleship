@@ -2,9 +2,12 @@
 
 // example DOMStuff.gameOver
 // DOMStuff.renderBoard
-const body = document.querySelector("body");
 
 const DOM = (() => {
+  const body = document.querySelector("body");
+  const playerOneGridContainer = document.createElement("div");
+  const playerTwoGridContainer = document.createElement("div");
+
   const renderMain = () => {
     const content = document.createElement("div");
     content.classList.add("main");
@@ -21,13 +24,13 @@ const DOM = (() => {
     playerOneDiv.classList.add("playercontainer");
     const playerOneTitle = document.createElement("h2");
     playerOneTitle.innerText = "Player One";
-    const playerOneGridContainer = document.createElement("div");
+    // const playerOneGridContainer = document.createElement("div");
     playerOneGridContainer.classList.add("grid");
     const playerTwoDiv = document.createElement("div");
     playerTwoDiv.classList.add("playercontainer");
     const playerTwoTitle = document.createElement("h2");
     playerTwoTitle.innerText = "Player Two";
-    const playerTwoGridContainer = document.createElement("div");
+    // const playerTwoGridContainer = document.createElement("div");
     playerTwoGridContainer.classList.add("grid");
 
     content.appendChild(titleDiv);
@@ -42,25 +45,29 @@ const DOM = (() => {
     playerTwoDiv.appendChild(playerTwoGridContainer);
 
     body.appendChild(content);
+  };
 
-    return { playerOneGridContainer };
+  let gridSquares = [];
+  const buildGrid = (playerContainer) => {
+    for (let i = 1; i <= 99; i++) {
+      const gridSquare = document.createElement("div");
+      gridSquare.classList.add("gridsquare");
+      gridSquare.innerText = "X1";
+      playerContainer.appendChild(gridSquare);
+      // put gridSquares in array, export array and use forEach in gameloop to populate gridSquare contents?
+      gridSquares.push(gridSquare);
+    }
   };
 
   const renderYourDisplay = () => {
-    const buildGridSquare = () => {
-      for (let i = 0; i <= 121; i++) {
-        const gridSquare = document.createElement("div");
-        gridSquare.innerText = "X1";
-        playerOneGridContainer.appendChild(gridSquare);
-      }
-    };
-    buildGridSquare();
+    buildGrid(playerOneGridContainer);
   };
 
-  const renderOpponentDisplay = () => {};
-  renderMain();
-  renderYourDisplay();
-  return { renderMain, renderYourDisplay, renderOpponentDisplay };
+  const renderOpponentDisplay = () => {
+    buildGrid(playerTwoGridContainer);
+  };
+
+  return { renderMain, renderYourDisplay, renderOpponentDisplay, gridSquares };
 })();
 
 export { DOM };

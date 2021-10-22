@@ -1,0 +1,33 @@
+.main {
+  display: grid;
+  grid-template-rows: 1fr, 5fr;
+  text-align: center;
+}
+
+.title {
+}
+
+.gamediv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+}
+
+.playercontainer {
+  display: grid;
+  grid-template-rows: 1fr 5fr;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  background-color: #2196f3;
+  padding: 10px;
+  /* grid-template-rows: 11; */
+}
+
+.gridsquare {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 10px;
+}

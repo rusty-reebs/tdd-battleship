@@ -23,13 +23,13 @@ const DOM = (() => {
     const playerOneDiv = document.createElement("div");
     playerOneDiv.classList.add("playercontainer");
     const playerOneTitle = document.createElement("h2");
-    playerOneTitle.innerText = "Player One";
+    playerOneTitle.innerText = "You";
     // const playerOneGridContainer = document.createElement("div");
     playerOneGridContainer.classList.add("grid");
     const playerTwoDiv = document.createElement("div");
     playerTwoDiv.classList.add("playercontainer");
     const playerTwoTitle = document.createElement("h2");
-    playerTwoTitle.innerText = "Player Two";
+    playerTwoTitle.innerText = "Computer";
     // const playerTwoGridContainer = document.createElement("div");
     playerTwoGridContainer.classList.add("grid");
 
@@ -47,27 +47,34 @@ const DOM = (() => {
     body.appendChild(content);
   };
 
-  let gridSquares = [];
-  const buildGrid = (playerContainer) => {
-    for (let i = 1; i <= 99; i++) {
+  let yourGridSquares = [];
+  let opponentGridSquares = [];
+  const buildGrid = (playerContainer, playerArray) => {
+    for (let i = 1; i <= 100; i++) {
       const gridSquare = document.createElement("div");
       gridSquare.classList.add("gridsquare");
-      gridSquare.innerText = "X1";
+      // gridSquare.innerText = "X1";
       playerContainer.appendChild(gridSquare);
       // put gridSquares in array, export array and use forEach in gameloop to populate gridSquare contents?
-      gridSquares.push(gridSquare);
+      playerArray.push(gridSquare);
     }
   };
 
   const renderYourDisplay = () => {
-    buildGrid(playerOneGridContainer);
+    buildGrid(playerOneGridContainer, yourGridSquares);
   };
 
   const renderOpponentDisplay = () => {
-    buildGrid(playerTwoGridContainer);
+    buildGrid(playerTwoGridContainer, opponentGridSquares);
   };
 
-  return { renderMain, renderYourDisplay, renderOpponentDisplay, gridSquares };
+  return {
+    renderMain,
+    renderYourDisplay,
+    renderOpponentDisplay,
+    yourGridSquares,
+    opponentGridSquares,
+  };
 })();
 
 export { DOM };

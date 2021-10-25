@@ -1,3 +1,4 @@
+import { DOM } from "./dom-ui";
 import { Ship } from "./ship";
 
 const Gameboard = () => {
@@ -107,6 +108,8 @@ const Gameboard = () => {
         case "carrier":
           shipObject = placedShips.find((ship) => ship.name === "carrier");
       }
+      //! new
+      array[index].hit = true;
       shipObject.hit();
       shipObject.hits++;
 
@@ -114,6 +117,7 @@ const Gameboard = () => {
         sunkShips.push(shipObject);
       }
     }
+    console.log(array);
   };
   return {
     array,

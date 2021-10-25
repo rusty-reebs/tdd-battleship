@@ -13,28 +13,29 @@ const DOM = (() => {
     content.classList.add("main");
     const titleDiv = document.createElement("div");
     titleDiv.classList.add("title");
-    const title = document.createElement("h1");
-    title.innerText = "The Classic Game of Battleship!";
-    const subtitle = document.createElement("h3");
+    const titleImage = document.createElement("img");
+    titleImage.src = "../img/battleship-title.png";
+    titleImage.height = "200";
+    const subtitle = document.createElement("h2");
     subtitle.innerText =
       "A project coded in plain JavaScript and CSS. Developed and tested with Jest.";
     const gameDiv = document.createElement("div");
     gameDiv.classList.add("gamediv");
     const playerOneDiv = document.createElement("div");
     playerOneDiv.classList.add("playercontainer");
-    const playerOneTitle = document.createElement("h2");
+    const playerOneTitle = document.createElement("h1");
     playerOneTitle.innerText = "You";
     // const playerOneGridContainer = document.createElement("div");
     playerOneGridContainer.classList.add("grid");
     const playerTwoDiv = document.createElement("div");
     playerTwoDiv.classList.add("playercontainer");
-    const playerTwoTitle = document.createElement("h2");
+    const playerTwoTitle = document.createElement("h1");
     playerTwoTitle.innerText = "Computer";
     // const playerTwoGridContainer = document.createElement("div");
     playerTwoGridContainer.classList.add("grid");
 
     content.appendChild(titleDiv);
-    titleDiv.appendChild(title);
+    titleDiv.appendChild(titleImage);
     titleDiv.appendChild(subtitle);
     content.appendChild(gameDiv);
     gameDiv.appendChild(playerOneDiv);
@@ -50,13 +51,18 @@ const DOM = (() => {
   let yourGridSquares = [];
   let opponentGridSquares = [];
   const buildGrid = (playerContainer, playerArray) => {
-    for (let i = 1; i <= 100; i++) {
-      const gridSquare = document.createElement("div");
-      gridSquare.classList.add("gridsquare");
-      // gridSquare.innerText = "X1";
-      playerContainer.appendChild(gridSquare);
-      // put gridSquares in array, export array and use forEach in gameloop to populate gridSquare contents?
-      playerArray.push(gridSquare);
+    let coord;
+    for (let i = 65; i < 75; i++) {
+      let ycoord = String.fromCharCode(i);
+      for (let i = 1; i <= 10; i++) {
+        let xcoord = i;
+        coord = ycoord.concat(xcoord);
+        const gridSquare = document.createElement("div");
+        gridSquare.classList.add("gridsquare");
+        gridSquare.dataset.coord = coord;
+        playerContainer.appendChild(gridSquare);
+        playerArray.push(gridSquare);
+      }
     }
   };
 
@@ -68,12 +74,30 @@ const DOM = (() => {
     buildGrid(playerTwoGridContainer, opponentGridSquares);
   };
 
+  const renderHits = (gameboard) => {
+    gameboard.array.forEach((coord, index) => {
+      if (coord.hit) {
+        opponentGridSquares[index].classList.add("hit");
+      }
+    });
+  };
+
+  const renderMisses = (gameboard) => {
+    gameboard.array.forEach((coord, index) => {
+      if (coord.missedShot) {
+        opponentGridSquares[index].classList.add("miss");
+      }
+    });
+  };
+
   return {
     renderMain,
     renderYourDisplay,
     renderOpponentDisplay,
     yourGridSquares,
     opponentGridSquares,
+    renderMisses,
+    renderHits,
   };
 })();
 

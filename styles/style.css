@@ -65,3 +65,14 @@ body {
 .occupied {
   background-color: grey;
 }
+
+.hit {
+  background-color: lightcoral;
+}
+
+.miss {
+  /* background-color: lightskyblue; */
+  background-color: #72a0c1;
+  background-color: aliceblue;
+  background-color: darkgray;
+}

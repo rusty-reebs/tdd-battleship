@@ -10,6 +10,12 @@ const Player = (name) => {
     return randomLetter.concat(randomNumber);
   };
 
+  const randomOrientation = () => {
+    let randomNum = Math.random();
+    if (randomNum <= 0.5) return "horizontal";
+    else return "vertical";
+  };
+
   let shotsFired = [];
   const attack = (enemy, coord) => {
     if (name === "computer") {
@@ -21,7 +27,7 @@ const Player = (name) => {
       shotsFired.push(computerCoords);
     } else enemy.receiveAttack(coord);
   };
-  return { name, attack };
+  return { name, attack, generateCoords, randomOrientation };
 };
 
 export { Player };

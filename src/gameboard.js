@@ -81,6 +81,7 @@ const Gameboard = () => {
       }
 
       placedShips.push(shipname);
+      // console.log(placedShips);
     }
   };
 

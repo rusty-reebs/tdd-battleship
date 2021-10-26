@@ -29,23 +29,35 @@ const gameLoop = () => {
 
   DOM.yourGridSquares.forEach((square, index) => {
     if (playerOneGameboard.array[index].occupiedBy) {
-      square.classList.toggle("occupied");
-    }
-  });
-
-  playerTwoGameboard.buildArray();
-  playerTwoGameboard.placeShip("carrier", "A4", "horizontal");
-  playerTwoGameboard.placeShip("battleship", "B10", "vertical");
-  playerTwoGameboard.placeShip("destroyer", "C4", "vertical");
-  playerTwoGameboard.placeShip("submarine", "H6", "horizontal");
-  playerTwoGameboard.placeShip("patrolboat", "J9", "horizontal");
-
-  DOM.opponentGridSquares.forEach((square, index) => {
-    if (playerTwoGameboard.array[index].occupiedBy) {
       square.classList.add("occupied");
     }
   });
 
+  playerTwoGameboard.buildArray();
+  let shipObject;
+  let ships = ["carrier", "battleship", "destroyer", "submarine", "patrolboat"];
+  ships.forEach((ship) => {
+    do {
+      playerTwoGameboard.placeShip(
+        ship,
+        playerTwo.generateCoords(),
+        playerTwo.randomOrientation()
+      );
+      shipObject = playerTwoGameboard.placedShips.find(
+        (obj) => obj.name === ship
+      );
+    } while (!shipObject);
+  });
+  console.log(playerTwoGameboard.placedShips);
+
+  //! uncomment to show computer ships
+  // DOM.opponentGridSquares.forEach((square, index) => {
+  //   if (playerTwoGameboard.array[index].occupiedBy) {
+  //     square.classList.add("occupied");
+  //   }
+  // });
+
+  //TODO player turns logic
   // let turn = 1;
   // if (turn % 2 == 1) {
   // user turn
@@ -64,10 +76,6 @@ const gameLoop = () => {
   // console.log("computer turn!");
   // }
   // turn++;
-
-  // player takes a turn
-  // add event listener for attack
-  // if array contains missedShot then call method to turn square red
 };
 
 export { gameLoop };

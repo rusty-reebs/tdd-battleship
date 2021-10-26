@@ -67,6 +67,7 @@ const DOM = (() => {
   };
 
   const renderYourDisplay = () => {
+    //TODO do same as below?
     buildGrid(playerOneGridContainer, yourGridSquares);
   };
 
@@ -75,6 +76,7 @@ const DOM = (() => {
   };
 
   const renderHits = (gameboard) => {
+    //TODO add placeholder for who's gridsquares
     gameboard.array.forEach((coord, index) => {
       if (coord.hit) {
         opponentGridSquares[index].classList.add("hit");
@@ -83,6 +85,7 @@ const DOM = (() => {
   };
 
   const renderMisses = (gameboard) => {
+    //TODO add placeholder for who's gridsquares
     gameboard.array.forEach((coord, index) => {
       if (coord.missedShot) {
         opponentGridSquares[index].classList.add("miss");

@@ -14,10 +14,14 @@ body {
 
 .main {
   display: grid;
-  /* grid-template-rows: 1fr 5fr; */
-  row-gap: 50px;
+  grid-template-rows: 2fr 1fr 5fr;
+  /* row-gap: 50px; */
   text-align: center;
   font-family: "Stardos Stencil", cursive;
+}
+
+.dim {
+  opacity: 0.3;
 }
 
 .title {
@@ -26,6 +30,26 @@ body {
 
 .title h2 {
   margin-top: -40px;
+}
+
+.messagediv {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.messagebox {
+  background-color: lightgrey;
+  opacity: 0.8;
+  border: 2px solid grey;
+  height: 50%;
+  width: 40%;
+  display: flex;
+  /* display: none; */
+  justify-content: center;
+  align-items: center;
+  font-size: 1vw;
 }
 
 .gamediv {
@@ -57,9 +81,14 @@ body {
 .gridsquare {
   background-color: lightgray;
   /* background-color: rgba(255, 255, 255, 0.8); */
-  border: 0.5px solid grey;
+  border: 0.5px solid black;
   height: 100%;
   width: 100%;
+}
+
+.gridsquare:hover {
+  /* background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%); */
+  /* background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114)); */
 }
 
 .occupied {
@@ -71,8 +100,7 @@ body {
 }
 
 .miss {
-  /* background-color: lightskyblue; */
-  background-color: #72a0c1;
-  background-color: aliceblue;
-  background-color: darkgray;
+  /* background-color: darkgray; */
+  /* background-color: #f5f5f5; */
+  background-color: #f2f3f4;
 }

@@ -7,6 +7,8 @@ const DOM = (() => {
   const body = document.querySelector("body");
   const playerOneGridContainer = document.createElement("div");
   const playerTwoGridContainer = document.createElement("div");
+  const messageDiv = document.createElement("div");
+  const gameDiv = document.createElement("div");
 
   const renderMain = () => {
     const content = document.createElement("div");
@@ -19,7 +21,8 @@ const DOM = (() => {
     const subtitle = document.createElement("h2");
     subtitle.innerText =
       "A project coded in plain JavaScript and CSS. Developed and tested with Jest.";
-    const gameDiv = document.createElement("div");
+    messageDiv.classList.add("messagediv");
+    // const gameDiv = document.createElement("div");
     gameDiv.classList.add("gamediv");
     const playerOneDiv = document.createElement("div");
     playerOneDiv.classList.add("playercontainer");
@@ -37,6 +40,7 @@ const DOM = (() => {
     content.appendChild(titleDiv);
     titleDiv.appendChild(titleImage);
     titleDiv.appendChild(subtitle);
+    content.appendChild(messageDiv);
     content.appendChild(gameDiv);
     gameDiv.appendChild(playerOneDiv);
     playerOneDiv.appendChild(playerOneTitle);
@@ -75,32 +79,53 @@ const DOM = (() => {
     buildGrid(playerTwoGridContainer, opponentGridSquares);
   };
 
-  const renderHits = (gameboard) => {
-    //TODO add placeholder for who's gridsquares
+  //! new
+  const renderHits = (gameboard, gridSquares) => {
     gameboard.array.forEach((coord, index) => {
       if (coord.hit) {
-        opponentGridSquares[index].classList.add("hit");
+        gridSquares[index].classList.add("hit");
       }
     });
   };
 
-  const renderMisses = (gameboard) => {
-    //TODO add placeholder for who's gridsquares
+  //! new
+  const renderMisses = (gameboard, gridSquares) => {
     gameboard.array.forEach((coord, index) => {
       if (coord.missedShot) {
-        opponentGridSquares[index].classList.add("miss");
+        gridSquares[index].classList.add("miss");
       }
     });
   };
+
+  const renderMessage = (text) => {
+    const messageBox = document.createElement("div");
+    messageBox.classList.add("messagebox");
+    const messageText = document.createElement("h2");
+    messageText.classList.add("messagetext");
+    messageText.textContent = text;
+    messageDiv.appendChild(messageBox);
+    messageBox.appendChild(messageText);
+  };
+
+  const renderGameOver = (gameboard) => {
+    gameDiv.classList.add("dim");
+    if (gameboard == "playerOneGameboard") {
+      renderMessage("Game Over! Computer Wins!");
+    } else renderMessage("Game Over! You win!");
+  };
+
+  // }
 
   return {
     renderMain,
+    renderMessage,
     renderYourDisplay,
     renderOpponentDisplay,
     yourGridSquares,
     opponentGridSquares,
     renderMisses,
     renderHits,
+    renderGameOver,
   };
 })();
 

@@ -81,7 +81,6 @@ const Gameboard = () => {
       }
 
       placedShips.push(shipname);
-      // console.log(placedShips);
     }
   };
 
@@ -118,7 +117,7 @@ const Gameboard = () => {
         sunkShips.push(shipObject);
       }
     }
-    console.log(array);
+    // console.log(array);
   };
   return {
     array,
@@ -126,6 +125,7 @@ const Gameboard = () => {
     placeShip,
     placedShips,
     receiveAttack,
+    sunkShips,
   };
 };
 

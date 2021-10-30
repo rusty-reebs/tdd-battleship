@@ -8,6 +8,8 @@ const DOM = (() => {
   const playerOneGridContainer = document.createElement("div");
   const playerTwoGridContainer = document.createElement("div");
   const messageDiv = document.createElement("div");
+  const messageBox = document.createElement("div");
+  const messageText = document.createElement("h2");
   const gameDiv = document.createElement("div");
 
   const renderMain = () => {
@@ -79,7 +81,6 @@ const DOM = (() => {
     buildGrid(playerTwoGridContainer, opponentGridSquares);
   };
 
-  //! new
   const renderHits = (gameboard, gridSquares) => {
     gameboard.array.forEach((coord, index) => {
       if (coord.hit) {
@@ -88,7 +89,6 @@ const DOM = (() => {
     });
   };
 
-  //! new
   const renderMisses = (gameboard, gridSquares) => {
     gameboard.array.forEach((coord, index) => {
       if (coord.missedShot) {
@@ -98,20 +98,27 @@ const DOM = (() => {
   };
 
   const renderMessage = (text) => {
-    const messageBox = document.createElement("div");
+    // const messageBox = document.createElement("div");
     messageBox.classList.add("messagebox");
-    const messageText = document.createElement("h2");
+    // const messageText = document.createElement("h2");
     messageText.classList.add("messagetext");
     messageText.textContent = text;
     messageDiv.appendChild(messageBox);
     messageBox.appendChild(messageText);
   };
 
+  const clearMessage = () => {
+    // messageDiv.removeChild(messageBox);
+    // messageBox.removeChild(messageText);
+    messageBox.style.display = "none";
+  };
+
   const renderGameOver = (gameboard) => {
     gameDiv.classList.add("dim");
     if (gameboard == "playerOneGameboard") {
       renderMessage("Game Over! Computer Wins!");
-    } else renderMessage("Game Over! You win!");
+    } else renderMessage("Game Over! You Win!");
+    //? add play again button after 300ms, call gameloop
   };
 
   // }
@@ -119,6 +126,7 @@ const DOM = (() => {
   return {
     renderMain,
     renderMessage,
+    clearMessage,
     renderYourDisplay,
     renderOpponentDisplay,
     yourGridSquares,

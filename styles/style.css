@@ -21,7 +21,7 @@ body {
 }
 
 .dim {
-  opacity: 0.3;
+  opacity: 0.5;
 }
 
 .title {
@@ -84,6 +84,10 @@ body {
   border: 0.5px solid black;
   height: 100%;
   width: 100%;
+}
+
+.select {
+  background-color: grey;
 }
 
 .gridsquare:hover {

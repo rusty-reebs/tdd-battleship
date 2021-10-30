@@ -21,23 +21,64 @@ const gameLoop = () => {
   // place your carrier pop-up
   // rotate 90 degrees button
   // on hover, add change class of next indices to show ship
+  // when array is full, then begin game. Need to modify gameloop().
 
   playerOneGameboard.buildArray();
-  playerOneGameboard.placeShip("carrier", "A4", "horizontal");
-  playerOneGameboard.placeShip("battleship", "B10", "vertical");
-  playerOneGameboard.placeShip("destroyer", "C4", "vertical");
-  playerOneGameboard.placeShip("submarine", "H6", "horizontal");
-  playerOneGameboard.placeShip("patrolboat", "J9", "horizontal");
+  let ships = ["carrier", "battleship", "destroyer", "submarine", "patrolboat"];
 
-  DOM.yourGridSquares.forEach((square, index) => {
-    if (playerOneGameboard.array[index].occupiedBy) {
-      square.classList.add("occupied");
-    }
+  // ships.forEach((ship) => {
+  //   DOM.renderMessage("Place your " + ship + "!");
+  //   DOM.yourGridSquares.forEach((square) => {
+  //     square.addEventListener("click", () => {
+  //       playerOneGameboard.placeShip(ship, square.dataset.coord, "horizontal");
+  //       console.log(playerOneGameboard.placedShips);
+  //       DOM.clearMessage();
+  //     });
+  //   });
+  // });
+  // ships.forEach((ship) => {
+
+  //! this code works to place the carrier
+  DOM.renderMessage("Place your carrier!");
+  DOM.yourGridSquares.forEach((square) => {
+    square.addEventListener("mouseover", () => {
+      square.classList.toggle("select");
+    });
+    square.addEventListener("mouseout", () => {
+      square.classList.toggle("select");
+    });
+    square.addEventListener("click", () => {
+      playerOneGameboard.placeShip(
+        "carrier",
+        square.dataset.coord,
+        "horizontal"
+      );
+      console.log(playerOneGameboard.placedShips);
+      DOM.clearMessage();
+      DOM.yourGridSquares.forEach((square, index) => {
+        if (playerOneGameboard.array[index].occupiedBy) {
+          square.classList.add("occupied");
+        }
+      });
+    });
   });
+  // });
+
+  // playerOneGameboard.placeShip("carrier", "A4", "horizontal");
+  // playerOneGameboard.placeShip("battleship", "B10", "vertical");
+  // playerOneGameboard.placeShip("destroyer", "C4", "vertical");
+  // playerOneGameboard.placeShip("submarine", "H6", "horizontal");
+  // playerOneGameboard.placeShip("patrolboat", "J9", "horizontal");
+
+  // ! original
+  // DOM.yourGridSquares.forEach((square, index) => {
+  //   if (playerOneGameboard.array[index].occupiedBy) {
+  //     square.classList.add("occupied");
+  //   }
+  // });
 
   playerTwoGameboard.buildArray();
   let shipObject;
-  let ships = ["carrier", "battleship", "destroyer", "submarine", "patrolboat"];
   ships.forEach((ship) => {
     do {
       playerTwoGameboard.placeShip(
@@ -62,7 +103,7 @@ const gameLoop = () => {
   let gameOver = false;
   const checkGameOver = (gameboard) => {
     if (gameboard.sunkShips.length == 5 && !gameOver) {
-      //adding this gameOver stops the message popup
+      //adding this gameOver stops the message popup, but if removeEventListener worked, then wouldn't need?
       DOM.renderGameOver(gameboard);
       gameOver = true;
       return true;

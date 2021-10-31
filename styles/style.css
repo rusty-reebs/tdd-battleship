@@ -66,6 +66,25 @@ body {
   grid-template-rows: 1fr 8fr;
 }
 
+.playeronetitle {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+}
+
+.rotatediv {
+  display: grid;
+
+  align-content: center;
+  /* justify-content: center; */
+}
+
+.rotate {
+  background-color: grey;
+  border: 1px solid black;
+  cursor: pointer;
+  display: block;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);

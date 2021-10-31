@@ -37,21 +37,51 @@ const gameLoop = () => {
   //   });
   // });
   // ships.forEach((ship) => {
-
+  let shipOrientation = "horizontal";
+  DOM.rotate.addEventListener("click", () => {
+    shipOrientation =
+      shipOrientation == "horizontal" ? "vertical" : "horizontal";
+    console.log(shipOrientation);
+  });
   //! this code works to place the carrier
   DOM.renderMessage("Place your carrier!");
-  DOM.yourGridSquares.forEach((square) => {
+  DOM.yourGridSquares.forEach((square, index) => {
     square.addEventListener("mouseover", () => {
       square.classList.toggle("select");
+      for (let i = 1; i < 5; i++) {
+        if (shipOrientation == "horizontal") {
+          if (5 <= 10 - playerOneGameboard.array[index].x + 1) {
+            DOM.yourGridSquares[index + i].classList.toggle("select");
+          }
+        } else {
+          // vertical placement
+          if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
+            DOM.yourGridSquares[index + i * 10].classList.toggle("select");
+          }
+        }
+      }
     });
+
     square.addEventListener("mouseout", () => {
       square.classList.toggle("select");
+      for (let i = 1; i < 5; i++) {
+        if (shipOrientation == "horizontal") {
+          if (5 <= 10 - playerOneGameboard.array[index].x + 1) {
+            DOM.yourGridSquares[index + i].classList.toggle("select");
+          }
+        } else {
+          // vertical
+          if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
+            DOM.yourGridSquares[index + i * 10].classList.toggle("select");
+          }
+        }
+      }
     });
     square.addEventListener("click", () => {
       playerOneGameboard.placeShip(
         "carrier",
         square.dataset.coord,
-        "horizontal"
+        shipOrientation
       );
       console.log(playerOneGameboard.placedShips);
       DOM.clearMessage();

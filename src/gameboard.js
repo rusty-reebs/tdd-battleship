@@ -1,4 +1,3 @@
-import { DOM } from "./dom-ui";
 import { Ship } from "./ship";
 
 const Gameboard = () => {
@@ -22,6 +21,7 @@ const Gameboard = () => {
   };
 
   let placedShips = [];
+
   const placeShip = (shipname, coord, orientation) => {
     shipname = Ship(shipname);
     const index = array.findIndex((coords) => coords.name === coord);

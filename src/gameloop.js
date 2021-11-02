@@ -56,11 +56,11 @@ const gameLoop = () => {
   });
 
   //! uncomment to show computer ships
-  DOM.computerGridSquares.forEach((square, index) => {
-    if (computerGameboard.array[index].occupiedBy) {
-      square.classList.add("occupied");
-    }
-  });
+  // DOM.computerGridSquares.forEach((square, index) => {
+  // if (computerGameboard.array[index].occupiedBy) {
+  // square.classList.add("occupied");
+  // }
+  // });
 
   let gameOver = false;
   const checkGameOver = (gameboard) => {
@@ -74,8 +74,6 @@ const gameLoop = () => {
       gameOver = true;
       return true;
     }
-    // stop game, play again button?
-    // turn off all event listeners?
   };
 
   DOM.computerGridSquares.forEach((square) => {
@@ -101,7 +99,7 @@ const gameLoop = () => {
           square.removeEventListener("click", listener);
           return;
         }
-      }, 400);
+      }, 300);
     });
   });
 };

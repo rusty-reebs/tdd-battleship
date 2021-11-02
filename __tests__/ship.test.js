@@ -1,5 +1,3 @@
-//TODO write a test, then make it pass
-
 import { Ship } from "../src/ship";
 
 describe("Ship factory tests", () => {

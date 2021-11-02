@@ -119,7 +119,6 @@ const DOM = (() => {
     gameDiv.classList.add("dim");
     renderMessage("Game Over! " + message);
   };
-  //? add play again button after 300ms, call gameloop
 
   renderMain();
   renderUserDisplay();

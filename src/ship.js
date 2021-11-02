@@ -30,6 +30,7 @@ const Ship = (shipname) => {
     hitCounter++;
     return hitCounter;
   };
+
   const isSunk = () => {
     if (hitCounter === length) return true;
     else return false;

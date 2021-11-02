@@ -108,7 +108,6 @@ const Gameboard = () => {
         case "carrier":
           shipObject = placedShips.find((ship) => ship.name === "carrier");
       }
-      //! new
       array[index].hit = true;
       shipObject.hit();
       shipObject.hits++;

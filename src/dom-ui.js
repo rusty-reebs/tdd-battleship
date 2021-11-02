@@ -11,8 +11,8 @@ const DOM = (() => {
   const messageBox = document.createElement("div");
   const messageText = document.createElement("h2");
   const gameDiv = document.createElement("div");
-  const rotateDiv = document.createElement("div");
-  const rotate = document.createElement("div");
+  const shuffleDiv = document.createElement("div");
+  const shuffle = document.createElement("div");
 
   const renderMain = () => {
     const content = document.createElement("div");
@@ -28,9 +28,9 @@ const DOM = (() => {
     messageDiv.classList.add("messagediv");
     // const gameDiv = document.createElement("div");
     gameDiv.classList.add("gamediv");
-    rotateDiv.classList.add("rotatediv");
-    rotate.classList.add("rotate");
-    rotate.innerText = "Rotate";
+    shuffleDiv.classList.add("shufflediv");
+    shuffle.classList.add("shuffle");
+    shuffle.innerText = "Shuffle";
     const playerOneDiv = document.createElement("div");
     playerOneDiv.classList.add("playercontainer");
     const playerOneTitleDiv = document.createElement("div");
@@ -56,8 +56,8 @@ const DOM = (() => {
     playerOneDiv.appendChild(playerOneGridContainer);
     // gameDiv.appendChild(rotateDiv);
     playerOneTitleDiv.appendChild(playerOneTitle);
-    playerOneTitleDiv.appendChild(rotateDiv);
-    rotateDiv.appendChild(rotate);
+    playerOneTitleDiv.appendChild(shuffleDiv);
+    shuffleDiv.appendChild(shuffle);
     gameDiv.appendChild(playerTwoDiv);
     playerTwoDiv.appendChild(playerTwoTitle);
     playerTwoDiv.appendChild(playerTwoGridContainer);
@@ -137,7 +137,8 @@ const DOM = (() => {
   return {
     renderMain,
     renderMessage,
-    rotate,
+    playerOneGridContainer,
+    shuffle,
     clearMessage,
     renderYourDisplay,
     renderOpponentDisplay,

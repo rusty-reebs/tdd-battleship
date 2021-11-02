@@ -16,30 +16,31 @@ const gameLoop = () => {
   DOM.renderYourDisplay();
   DOM.renderOpponentDisplay();
 
-  // TODO place ship logic
-  // place your carrier pop-up
-  // rotate 90 degrees button
-  // on hover, add change class of next indices to show ship
-  // when array is full, then begin game. Need to modify gameloop().
+  let ships = ["carrier", "battleship", "destroyer", "submarine", "patrolboat"];
+  let shipObject;
 
   playerOneGameboard.buildArray();
-  let ships = ["carrier", "battleship", "destroyer", "submarine", "patrolboat"];
+  ships.forEach((ship) => {
+    do {
+      playerOneGameboard.placeShip(
+        ship,
+        playerOne.generateCoords(),
+        playerOne.randomOrientation()
+      );
+      shipObject = playerOneGameboard.placedShips.find(
+        (obj) => obj.name === ship
+      );
+    } while (!shipObject);
+  });
 
-  // ships.forEach((ship) => {
-  //   DOM.renderMessage("Place your " + ship + "!");
-  //   DOM.yourGridSquares.forEach((square) => {
-  //     square.addEventListener("click", () => {
-  //       playerOneGameboard.placeShip(ship, square.dataset.coord, "horizontal");
-  //       console.log(playerOneGameboard.placedShips);
-  //       DOM.clearMessage();
-  //     });
-  //   });
-  // });
-  let shipOrientation = "horizontal";
-  DOM.rotate.addEventListener("click", () => {
-    shipOrientation =
-      shipOrientation == "horizontal" ? "vertical" : "horizontal";
-    console.log(shipOrientation);
+  DOM.yourGridSquares.forEach((square, index) => {
+    if (playerOneGameboard.array[index].occupiedBy) {
+      square.classList.add("occupied");
+    }
+  });
+
+  DOM.shuffle.addEventListener("click", () => {
+    location.reload();
   });
 
   //! function beginGame?
@@ -50,53 +51,53 @@ const gameLoop = () => {
   //! need to stop and wait for a click ... await
   //! this code works to place the carrier
   //? maybe DOM.renderYourDisplay with removeChilds to clear all event listeners then rebuild
-  DOM.renderMessage("Place your carrier!");
-  DOM.yourGridSquares.forEach((square, index) => {
-    square.addEventListener("mouseover", () => {
-      square.classList.toggle("select");
-      for (let i = 1; i < 5; i++) {
-        if (shipOrientation == "horizontal") {
-          if (5 <= 10 - playerOneGameboard.array[index].x + 1) {
-            DOM.yourGridSquares[index + i].classList.toggle("select");
-          }
-        } else {
-          if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
-            DOM.yourGridSquares[index + i * 10].classList.toggle("select");
-          }
-        }
-      }
-    });
+  // DOM.renderMessage("Place your carrier!");
+  // DOM.yourGridSquares.forEach((square, index) => {
+  //   square.addEventListener("mouseover", () => {
+  //     square.classList.toggle("select");
+  //     for (let i = 1; i < 5; i++) {
+  //       if (shipOrientation == "horizontal") {
+  //         if (5 <= 10 - playerOneGameboard.array[index].x + 1) {
+  //           DOM.yourGridSquares[index + i].classList.toggle("select");
+  //         }
+  //       } else {
+  //         if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
+  //           DOM.yourGridSquares[index + i * 10].classList.toggle("select");
+  //         }
+  //       }
+  //     }
+  //   });
 
-    square.addEventListener("mouseout", () => {
-      square.classList.toggle("select");
-      for (let i = 1; i < 5; i++) {
-        if (shipOrientation == "horizontal") {
-          if (5 <= 10 - playerOneGameboard.array[index].x + 1) {
-            DOM.yourGridSquares[index + i].classList.toggle("select");
-          }
-        } else {
-          if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
-            DOM.yourGridSquares[index + i * 10].classList.toggle("select");
-          }
-        }
-      }
-    });
+  //   square.addEventListener("mouseout", () => {
+  //     square.classList.toggle("select");
+  //     for (let i = 1; i < 5; i++) {
+  //       if (shipOrientation == "horizontal") {
+  //         if (5 <= 10 - playerOneGameboard.array[index].x + 1) {
+  //           DOM.yourGridSquares[index + i].classList.toggle("select");
+  //         }
+  //       } else {
+  //         if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
+  //           DOM.yourGridSquares[index + i * 10].classList.toggle("select");
+  //         }
+  //       }
+  //     }
+  //   });
 
-    square.addEventListener("click", () => {
-      playerOneGameboard.placeShip(
-        "carrier",
-        square.dataset.coord,
-        shipOrientation
-      );
-      console.log(playerOneGameboard.placedShips);
-      DOM.clearMessage();
-      DOM.yourGridSquares.forEach((square, index) => {
-        if (playerOneGameboard.array[index].occupiedBy) {
-          square.classList.add("occupied");
-        }
-      });
-    });
-  });
+  //   square.addEventListener("click", () => {
+  //     playerOneGameboard.placeShip(
+  //       "carrier",
+  //       square.dataset.coord,
+  //       shipOrientation
+  //     );
+  //     console.log(playerOneGameboard.placedShips);
+  //     DOM.clearMessage();
+  //     DOM.yourGridSquares.forEach((square, index) => {
+  //       if (playerOneGameboard.array[index].occupiedBy) {
+  //         square.classList.add("occupied");
+  //       }
+  //     });
+  //   });
+  // });
   // });
 
   // playerOneGameboard.placeShip("carrier", "A4", "horizontal");
@@ -105,15 +106,8 @@ const gameLoop = () => {
   // playerOneGameboard.placeShip("submarine", "H6", "horizontal");
   // playerOneGameboard.placeShip("patrolboat", "J9", "horizontal");
 
-  // ! original
-  // DOM.yourGridSquares.forEach((square, index) => {
-  //   if (playerOneGameboard.array[index].occupiedBy) {
-  //     square.classList.add("occupied");
-  //   }
-  // });
-
   playerTwoGameboard.buildArray();
-  let shipObject;
+  // let shipObject;
   ships.forEach((ship) => {
     do {
       playerTwoGameboard.placeShip(
@@ -151,6 +145,10 @@ const gameLoop = () => {
 
   DOM.opponentGridSquares.forEach((square) => {
     square.addEventListener("click", function listener() {
+      //! if shuffle button exists, hide it
+      if ((DOM.shuffle.style.display = "block")) {
+        DOM.shuffle.style.display = "none";
+      }
       playerOne.attack(playerTwoGameboard, square.dataset.coord),
         DOM.renderMisses(playerTwoGameboard, DOM.opponentGridSquares);
       DOM.renderHits(playerTwoGameboard, DOM.opponentGridSquares);
@@ -171,13 +169,6 @@ const gameLoop = () => {
       }, 400);
     });
   });
-
-  //! The computer sank your battleship!
-  //! You sank the computer's battleship!
-  //? can check for a new sunk ship added to array?
-  // check length of array, if it is longer (a ship added), then get that ship?
-
-  // const checkSunkShip = () => {}
 };
 
 export { gameLoop };

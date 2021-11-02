@@ -71,14 +71,14 @@ body {
   grid-template-columns: 4fr 1fr;
 }
 
-.rotatediv {
+.shufflediv {
   display: grid;
 
   align-content: center;
   /* justify-content: center; */
 }
 
-.rotate {
+.shuffle {
   background-color: grey;
   border: 1px solid black;
   cursor: pointer;

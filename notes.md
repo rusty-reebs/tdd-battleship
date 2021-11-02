@@ -48,7 +48,7 @@ Gameboard {
   receiveAttack() --> calls hit function for correct ship, or records coords of missed shot
   missedShots: [{X: Y:}, {X: Y:}]
   placedShips: ["carrier", "submarine", "patrolboat"] --> when array is full then begin game
-  sunkShips: ["battleship", "destroyer"]
+  sunkShips: ["battleship", "destroyer"] --> push to array when isSunk = true
 }
 
 Player {
@@ -62,3 +62,9 @@ gameLoop () => {
   create Gameboards
 
 }
+
+can add +10 or -10 to index to check against vertical placement?
+
+TODO:
+
+Jest mock functions

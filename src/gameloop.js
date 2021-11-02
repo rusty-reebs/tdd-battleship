@@ -15,7 +15,6 @@ const gameLoop = () => {
   DOM.renderMain();
   DOM.renderYourDisplay();
   DOM.renderOpponentDisplay();
-  // DOM.renderMessage("The computer sank your battleship!");
 
   // TODO place ship logic
   // place your carrier pop-up
@@ -36,14 +35,21 @@ const gameLoop = () => {
   //     });
   //   });
   // });
-  // ships.forEach((ship) => {
   let shipOrientation = "horizontal";
   DOM.rotate.addEventListener("click", () => {
     shipOrientation =
       shipOrientation == "horizontal" ? "vertical" : "horizontal";
     console.log(shipOrientation);
   });
+
+  //! function beginGame?
+
+  // has to be a loop, clearing events listeners each time
+  // ships.forEach((ship) => {
+  // nothing is clicked so it just renders all the messages
+  //! need to stop and wait for a click ... await
   //! this code works to place the carrier
+  //? maybe DOM.renderYourDisplay with removeChilds to clear all event listeners then rebuild
   DOM.renderMessage("Place your carrier!");
   DOM.yourGridSquares.forEach((square, index) => {
     square.addEventListener("mouseover", () => {
@@ -54,7 +60,6 @@ const gameLoop = () => {
             DOM.yourGridSquares[index + i].classList.toggle("select");
           }
         } else {
-          // vertical placement
           if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
             DOM.yourGridSquares[index + i * 10].classList.toggle("select");
           }
@@ -70,13 +75,13 @@ const gameLoop = () => {
             DOM.yourGridSquares[index + i].classList.toggle("select");
           }
         } else {
-          // vertical
           if (5 <= 10 - playerOneGameboard.array[index].yNum + 1) {
             DOM.yourGridSquares[index + i * 10].classList.toggle("select");
           }
         }
       }
     });
+
     square.addEventListener("click", () => {
       playerOneGameboard.placeShip(
         "carrier",
@@ -121,7 +126,7 @@ const gameLoop = () => {
       );
     } while (!shipObject);
   });
-  console.log(playerTwoGameboard.placedShips);
+  // console.log(playerTwoGameboard.placedShips);
 
   //! uncomment to show computer ships
   DOM.opponentGridSquares.forEach((square, index) => {
@@ -129,6 +134,8 @@ const gameLoop = () => {
       square.classList.add("occupied");
     }
   });
+
+  //! end function beginGame?
 
   let gameOver = false;
   const checkGameOver = (gameboard) => {

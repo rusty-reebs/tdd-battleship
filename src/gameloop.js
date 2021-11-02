@@ -2,35 +2,36 @@ import { Player } from "./player";
 import { Gameboard } from "./gameboard";
 import { DOM } from "./dom-ui";
 
-// set up new game
-// create players and gameboards
-//! rename variables user, computer, userGameboard, computerGameboard, userGridSquares, computerGridSquares
 const gameLoop = () => {
-  const playerOne = Player("user");
-  const playerTwo = Player("computer");
-  const playerOneGameboard = Gameboard();
-  const playerTwoGameboard = Gameboard();
+  const user = Player("user");
+  const computer = Player("computer");
+  const userGameboard = Gameboard();
+  const computerGameboard = Gameboard();
 
-  let ships = ["carrier", "battleship", "destroyer", "submarine", "patrolboat"];
+  const ships = [
+    "carrier",
+    "battleship",
+    "destroyer",
+    "submarine",
+    "patrolboat",
+  ];
+
+  userGameboard.buildArray();
   let shipObject;
-
-  playerOneGameboard.buildArray();
 
   ships.forEach((ship) => {
     do {
-      playerOneGameboard.placeShip(
+      userGameboard.placeShip(
         ship,
-        playerOne.generateCoords(),
-        playerOne.randomOrientation()
+        user.generateCoords(),
+        user.randomOrientation()
       );
-      shipObject = playerOneGameboard.placedShips.find(
-        (obj) => obj.name === ship
-      );
+      shipObject = userGameboard.placedShips.find((obj) => obj.name === ship);
     } while (!shipObject);
   });
 
-  DOM.yourGridSquares.forEach((square, index) => {
-    if (playerOneGameboard.array[index].occupiedBy) {
+  DOM.userGridSquares.forEach((square, index) => {
+    if (userGameboard.array[index].occupiedBy) {
       square.classList.add("occupied");
     }
   });
@@ -39,36 +40,37 @@ const gameLoop = () => {
     location.reload();
   });
 
-  //! function beginGame?
+  computerGameboard.buildArray();
 
-  playerTwoGameboard.buildArray();
-  // let shipObject;
   ships.forEach((ship) => {
     do {
-      playerTwoGameboard.placeShip(
+      computerGameboard.placeShip(
         ship,
-        playerTwo.generateCoords(),
-        playerTwo.randomOrientation()
+        computer.generateCoords(),
+        computer.randomOrientation()
       );
-      shipObject = playerTwoGameboard.placedShips.find(
+      shipObject = computerGameboard.placedShips.find(
         (obj) => obj.name === ship
       );
     } while (!shipObject);
   });
 
   //! uncomment to show computer ships
-  DOM.opponentGridSquares.forEach((square, index) => {
-    if (playerTwoGameboard.array[index].occupiedBy) {
+  DOM.computerGridSquares.forEach((square, index) => {
+    if (computerGameboard.array[index].occupiedBy) {
       square.classList.add("occupied");
     }
   });
 
-  //! end function beginGame?
-
   let gameOver = false;
   const checkGameOver = (gameboard) => {
     if (gameboard.sunkShips.length == 5 && !gameOver) {
-      DOM.renderGameOver(gameboard);
+      if (gameboard === userGameboard) {
+        DOM.renderGameOver("Computer wins!");
+      }
+      if (gameboard === computerGameboard) {
+        DOM.renderGameOver("You win!");
+      }
       gameOver = true;
       return true;
     }
@@ -76,26 +78,26 @@ const gameLoop = () => {
     // turn off all event listeners?
   };
 
-  DOM.opponentGridSquares.forEach((square) => {
+  DOM.computerGridSquares.forEach((square) => {
     square.addEventListener("click", function listener() {
       if ((DOM.shuffle.style.display = "block")) {
         DOM.shuffle.style.display = "none";
         DOM.clearMessage();
       }
-      playerOne.attack(playerTwoGameboard, square.dataset.coord),
-        DOM.renderMisses(playerTwoGameboard, DOM.opponentGridSquares);
-      DOM.renderHits(playerTwoGameboard, DOM.opponentGridSquares);
-      if (checkGameOver(playerTwoGameboard)) {
-        DOM.opponentGridSquares.forEach((square) => {
+      user.attack(computerGameboard, square.dataset.coord),
+        DOM.renderMisses(computerGameboard, DOM.computerGridSquares);
+      DOM.renderHits(computerGameboard, DOM.computerGridSquares);
+      if (checkGameOver(computerGameboard)) {
+        DOM.computerGridSquares.forEach((square) => {
           square.removeEventListener("click", listener);
         });
         return;
       }
       setTimeout(() => {
-        playerTwo.attack(playerOneGameboard);
-        DOM.renderMisses(playerOneGameboard, DOM.yourGridSquares);
-        DOM.renderHits(playerOneGameboard, DOM.yourGridSquares);
-        if (checkGameOver(playerOneGameboard)) {
+        computer.attack(userGameboard);
+        DOM.renderMisses(userGameboard, DOM.userGridSquares);
+        DOM.renderHits(userGameboard, DOM.userGridSquares);
+        if (checkGameOver(userGameboard)) {
           square.removeEventListener("click", listener);
           return;
         }

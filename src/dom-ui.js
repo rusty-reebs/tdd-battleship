@@ -2,8 +2,8 @@
 
 const DOM = (() => {
   const body = document.querySelector("body");
-  const playerOneGridContainer = document.createElement("div");
-  const playerTwoGridContainer = document.createElement("div");
+  const userGridContainer = document.createElement("div");
+  const computerGridContainer = document.createElement("div");
   const messageDiv = document.createElement("div");
   const messageBox = document.createElement("div");
   const messageText = document.createElement("h2");
@@ -30,18 +30,18 @@ const DOM = (() => {
     shuffleDiv.classList.add("shufflediv");
     shuffle.classList.add("shuffle");
     shuffle.innerText = "Shuffle";
-    const playerOneDiv = document.createElement("div");
-    playerOneDiv.classList.add("playercontainer");
-    const playerOneTitleDiv = document.createElement("div");
-    playerOneTitleDiv.classList.add("playeronetitle");
-    const playerOneTitle = document.createElement("h1");
-    playerOneTitle.innerText = "You";
-    playerOneGridContainer.classList.add("grid");
-    const playerTwoDiv = document.createElement("div");
-    playerTwoDiv.classList.add("playercontainer");
-    const playerTwoTitle = document.createElement("h1");
-    playerTwoTitle.innerText = "Computer";
-    playerTwoGridContainer.classList.add("grid");
+    const userDiv = document.createElement("div");
+    userDiv.classList.add("playercontainer");
+    const userTitleDiv = document.createElement("div");
+    userTitleDiv.classList.add("playeronetitle");
+    const userTitle = document.createElement("h1");
+    userTitle.innerText = "You";
+    userGridContainer.classList.add("grid");
+    const computerDiv = document.createElement("div");
+    computerDiv.classList.add("playercontainer");
+    const computerTitle = document.createElement("h1");
+    computerTitle.innerText = "Computer";
+    computerGridContainer.classList.add("grid");
 
     content.appendChild(titleDiv);
     titleDiv.appendChild(titleImage);
@@ -50,21 +50,21 @@ const DOM = (() => {
     messageDiv.appendChild(messageBox);
     messageBox.appendChild(messageText);
     content.appendChild(gameDiv);
-    gameDiv.appendChild(playerOneDiv);
-    playerOneDiv.appendChild(playerOneTitleDiv);
-    playerOneDiv.appendChild(playerOneGridContainer);
-    playerOneTitleDiv.appendChild(playerOneTitle);
-    playerOneTitleDiv.appendChild(shuffleDiv);
+    gameDiv.appendChild(userDiv);
+    userDiv.appendChild(userTitleDiv);
+    userDiv.appendChild(userGridContainer);
+    userTitleDiv.appendChild(userTitle);
+    userTitleDiv.appendChild(shuffleDiv);
     shuffleDiv.appendChild(shuffle);
-    gameDiv.appendChild(playerTwoDiv);
-    playerTwoDiv.appendChild(playerTwoTitle);
-    playerTwoDiv.appendChild(playerTwoGridContainer);
+    gameDiv.appendChild(computerDiv);
+    computerDiv.appendChild(computerTitle);
+    computerDiv.appendChild(computerGridContainer);
 
     body.appendChild(content);
   };
 
-  let yourGridSquares = [];
-  let opponentGridSquares = [];
+  let userGridSquares = [];
+  let computerGridSquares = [];
 
   const buildGrid = (playerContainer, playerArray) => {
     let coord;
@@ -82,13 +82,12 @@ const DOM = (() => {
     }
   };
 
-  const renderYourDisplay = () => {
-    //TODO do same as below?
-    buildGrid(playerOneGridContainer, yourGridSquares);
+  const renderUserDisplay = () => {
+    buildGrid(userGridContainer, userGridSquares);
   };
 
-  const renderOpponentDisplay = () => {
-    buildGrid(playerTwoGridContainer, opponentGridSquares);
+  const renderComputerDisplay = () => {
+    buildGrid(computerGridContainer, computerGridSquares);
   };
 
   const renderHits = (gameboard, gridSquares) => {
@@ -116,25 +115,23 @@ const DOM = (() => {
     messageBox.style.display = "none";
   };
 
-  const renderGameOver = (gameboard) => {
+  const renderGameOver = (message) => {
     gameDiv.classList.add("dim");
-    if (gameboard == "playerOneGameboard") {
-      renderMessage("Game Over! Computer Wins!");
-    } else renderMessage("Game Over! You Win!");
-    //? add play again button after 300ms, call gameloop
+    renderMessage("Game Over! " + message);
   };
+  //? add play again button after 300ms, call gameloop
 
   renderMain();
-  renderYourDisplay();
-  renderOpponentDisplay();
+  renderUserDisplay();
+  renderComputerDisplay();
   renderMessage("Shuffle your ships or attack the enemy!");
 
   return {
     renderMessage,
     clearMessage,
     shuffle,
-    yourGridSquares,
-    opponentGridSquares,
+    userGridSquares,
+    computerGridSquares,
     renderMisses,
     renderHits,
     renderGameOver,

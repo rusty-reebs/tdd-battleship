@@ -1,6 +1,4 @@
-//TODO write a test, then make it pass
-
-//TODO do your best to isolate the app functionality from DOM manipulation
+// Ship factory function
 
 const Ship = (shipname) => {
   let name;

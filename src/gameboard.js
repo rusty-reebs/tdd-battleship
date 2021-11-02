@@ -117,8 +117,8 @@ const Gameboard = () => {
         sunkShips.push(shipObject);
       }
     }
-    // console.log(array);
   };
+
   return {
     array,
     buildArray,

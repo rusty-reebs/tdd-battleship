@@ -1,8 +1,5 @@
 // DOM methods
 
-// example DOMStuff.gameOver
-// DOMStuff.renderBoard
-
 const DOM = (() => {
   const body = document.querySelector("body");
   const playerOneGridContainer = document.createElement("div");
@@ -26,7 +23,9 @@ const DOM = (() => {
     subtitle.innerText =
       "A project coded in plain JavaScript and CSS. Developed and tested with Jest.";
     messageDiv.classList.add("messagediv");
-    // const gameDiv = document.createElement("div");
+    messageBox.classList.add("messagebox");
+    messageText.classList.add("messagetext");
+
     gameDiv.classList.add("gamediv");
     shuffleDiv.classList.add("shufflediv");
     shuffle.classList.add("shuffle");
@@ -37,24 +36,23 @@ const DOM = (() => {
     playerOneTitleDiv.classList.add("playeronetitle");
     const playerOneTitle = document.createElement("h1");
     playerOneTitle.innerText = "You";
-    // const playerOneGridContainer = document.createElement("div");
     playerOneGridContainer.classList.add("grid");
     const playerTwoDiv = document.createElement("div");
     playerTwoDiv.classList.add("playercontainer");
     const playerTwoTitle = document.createElement("h1");
     playerTwoTitle.innerText = "Computer";
-    // const playerTwoGridContainer = document.createElement("div");
     playerTwoGridContainer.classList.add("grid");
 
     content.appendChild(titleDiv);
     titleDiv.appendChild(titleImage);
     titleDiv.appendChild(subtitle);
     content.appendChild(messageDiv);
+    messageDiv.appendChild(messageBox);
+    messageBox.appendChild(messageText);
     content.appendChild(gameDiv);
     gameDiv.appendChild(playerOneDiv);
     playerOneDiv.appendChild(playerOneTitleDiv);
     playerOneDiv.appendChild(playerOneGridContainer);
-    // gameDiv.appendChild(rotateDiv);
     playerOneTitleDiv.appendChild(playerOneTitle);
     playerOneTitleDiv.appendChild(shuffleDiv);
     shuffleDiv.appendChild(shuffle);
@@ -67,6 +65,7 @@ const DOM = (() => {
 
   let yourGridSquares = [];
   let opponentGridSquares = [];
+
   const buildGrid = (playerContainer, playerArray) => {
     let coord;
     for (let i = 65; i < 75; i++) {
@@ -109,18 +108,11 @@ const DOM = (() => {
   };
 
   const renderMessage = (text) => {
-    // const messageBox = document.createElement("div");
-    messageBox.classList.add("messagebox");
-    // const messageText = document.createElement("h2");
-    messageText.classList.add("messagetext");
+    messageBox.style.display = "flex";
     messageText.textContent = text;
-    messageDiv.appendChild(messageBox);
-    messageBox.appendChild(messageText);
   };
 
   const clearMessage = () => {
-    // messageDiv.removeChild(messageBox);
-    // messageBox.removeChild(messageText);
     messageBox.style.display = "none";
   };
 
@@ -132,16 +124,15 @@ const DOM = (() => {
     //? add play again button after 300ms, call gameloop
   };
 
-  // }
+  renderMain();
+  renderYourDisplay();
+  renderOpponentDisplay();
+  renderMessage("Shuffle your ships or attack the enemy!");
 
   return {
-    renderMain,
     renderMessage,
-    playerOneGridContainer,
-    shuffle,
     clearMessage,
-    renderYourDisplay,
-    renderOpponentDisplay,
+    shuffle,
     yourGridSquares,
     opponentGridSquares,
     renderMisses,

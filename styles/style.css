@@ -46,7 +46,6 @@ body {
   height: 50%;
   width: 40%;
   display: flex;
-  /* display: none; */
   justify-content: center;
   align-items: center;
   font-size: 1vw;
@@ -73,9 +72,7 @@ body {
 
 .shufflediv {
   display: grid;
-
   align-content: center;
-  /* justify-content: center; */
 }
 
 .shuffle {
@@ -93,13 +90,10 @@ body {
   opacity: 0.8;
   width: 400px;
   height: 400px;
-  /* padding: 10px; */
-  /* background-color: white; */
 }
 
 .gridsquare {
   background-color: lightgray;
-  /* background-color: rgba(255, 255, 255, 0.8); */
   border: 0.5px solid black;
   height: 100%;
   width: 100%;
@@ -107,11 +101,6 @@ body {
 
 .select {
   background-color: grey;
-}
-
-.gridsquare:hover {
-  /* background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%); */
-  /* background: linear-gradient(to right, rgb(242, 112, 156), rgb(255, 148, 114)); */
 }
 
 .occupied {
@@ -123,7 +112,5 @@ body {
 }
 
 .miss {
-  /* background-color: darkgray; */
-  /* background-color: #f5f5f5; */
   background-color: #f2f3f4;
 }

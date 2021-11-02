@@ -17,7 +17,7 @@ const DOM = (() => {
     const titleDiv = document.createElement("div");
     titleDiv.classList.add("title");
     const titleImage = document.createElement("img");
-    titleImage.src = "../img/battleship-title.png";
+    titleImage.src = "./img/battleship-title.png";
     titleImage.height = "200";
     const subtitle = document.createElement("h2");
     subtitle.innerText =

@@ -1,17 +1,12 @@
 # Battleship TDD project ⛴
 
-**Battleship game with test-driven-development, written in plain JavaScript.**  
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)&nbsp;![Jest](https://img.shields.io/badge/-jest-%23C21325?style=for-the-badge&logo=jest&logoColor=white)&nbsp;![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)&nbsp;![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
-**This code has many refactoring/additional feature opportunities, including:**
-- defining ships one time, therefore using fewer arrays
-- a shuffle ships function instead of location.reload()
-- manual ship placement with mouseover events
+Date completed: November 2, 2021  
 
 **Best viewed on 🖥 desktop!**  
 
 **See it live at (https://rusty-reebs.github.io/tdd-battleship/)!**  
-
-Date completed: November 2, 2021  
 
 Objectives: use Jest unit tests to develop the classic game of Battleship. Organize code with factory functions and modules. Keep DOM manipulation separate from game logic.  
 
